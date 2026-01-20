@@ -1,8 +1,10 @@
 package com.tau.Cucumber_AskOmDch;
 
+import domain.User;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,74 +15,91 @@ public class AccountPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
+    @FindBy(id = "username")
+    private WebElement usernameField;
+
+    @FindBy(id = "password")
+    private WebElement passwordField;
+
+    @FindBy(name = "login")
+    private WebElement loginButton;
+
+    @FindBy(id = "reg_username")
+    private WebElement regUsernameField;
+
+    @FindBy(id = "reg_email")
+    private WebElement regEmailField;
+
+    @FindBy(id = "reg_password")
+    private WebElement regPasswordField;
+
+    @FindBy(name = "register")
+    private WebElement registerButton;
+
+    @FindBy(css = ".wp-block-cover__inner-container h1")
+    private WebElement accountHeader;
+
+    @FindBy(xpath = "//p[contains(text(),'Hello')]")
+    private WebElement welcomeText;
+
+    @FindBy(css = ".woocommerce-error li")
+    private WebElement errorMessage;
+
+
     public AccountPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        PageFactory.initElements(driver, this);
     }
 
-    private By accountHeader = By.cssSelector(".wp-block-cover__inner-container h1");
 
-    private By username = By.id("username");
-    private By password = By.id("password");
-    private By loginButton = By.name("login");
-
-    private By regUsername = By.id("reg_username");
-    private By regEmail = By.id("reg_email");
-    private By regPassword = By.id("reg_password");
-    private By registerButton = By.name("register");
-
-    private By welcomeText = By.xpath(
-            "//p[contains(text(),'Hello')]");
-    private By errorMessage = By.cssSelector(".woocommerce-error li");
     public AccountPage enterLoginUsername(String value) {
-        driver.findElement(username).sendKeys(value);
+        usernameField.sendKeys(value);
         return this;
     }
 
     public AccountPage enterLoginPassword(String value) {
-        driver.findElement(password).sendKeys(value);
+        passwordField.sendKeys(value);
         return this;
     }
 
     public AccountPage clickLogin() {
-        driver.findElement(loginButton).click();
+        loginButton.click();
         return this;
     }
+
 
     public AccountPage enterRegUsername(String value) {
-        driver.findElement(regUsername).sendKeys(value);
+        regUsernameField.sendKeys(value);
         return this;
     }
 
-
     public AccountPage enterRegEmail(String value) {
-        driver.findElement(regEmail).sendKeys(value);
+        regEmailField.sendKeys(value);
         return this;
     }
 
     public AccountPage enterRegPassword(String value) {
-        driver.findElement(regPassword).sendKeys(value);
+        regPasswordField.sendKeys(value);
         return this;
     }
 
     public AccountPage clickRegister() {
-        driver.findElement(registerButton).click();
+        registerButton.click();
         return this;
     }
 
 
     public String getWelcomeText() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeText)).getText();
+        return wait.until(ExpectedConditions.visibilityOf(welcomeText)).getText();
     }
 
     public String getErrorMessage() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();
+        return wait.until(ExpectedConditions.visibilityOf(errorMessage)).getText();
     }
 
     public String getAccountHeader() {
-        return driver.findElement(accountHeader).getText();
+        return accountHeader.getText();
     }
 
-
 }
-

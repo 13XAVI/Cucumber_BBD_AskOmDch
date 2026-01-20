@@ -2,7 +2,7 @@
 Feature: Product Browsing
   As a user
   I want to search and filter products
-  So that I can quickly find products I am interested in
+  So that I can quickly find products I am interested to buy
 
   Background:
     Given I am on the AskOmDch Store page To Browse Product
