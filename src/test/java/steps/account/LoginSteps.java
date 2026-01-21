@@ -1,10 +1,9 @@
 package steps.account;
 
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import steps.Hook;
+import hooks.Hook;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -17,7 +16,6 @@ public class LoginSteps {
     }
 
 
-    /** Valid login scenario */
     @When("I login with username {string} and password {string}")
     public void loginWithUsernameAndPassword(String username, String password) {
 

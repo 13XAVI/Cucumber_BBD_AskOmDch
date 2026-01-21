@@ -4,7 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import steps.Hook;
+import hooks.Hook;
 import utils.UniqueFields;
 
 
@@ -19,7 +19,6 @@ public class RegistrationSteps {
     public void iAmOnTheAskOmDchAccountPage() {
         Hook.homePage.clickAccount();
     }
-
 
 
     @When("I register with valid credentials")
@@ -87,8 +86,6 @@ public class RegistrationSteps {
     }
 
 
-    /** Invalid Email Format */
-
     @When("I register with invalid email format {string}")
     public void iRegisterWithInvalidEmailFormat(String email) {
         Hook.accountPage
@@ -98,7 +95,6 @@ public class RegistrationSteps {
                 .clickRegister();
     }
 
-    /** Common Assertions */
 
     @Then("I should see the error message {string}")
     public void iShouldSeeTheErrorMessage(String expectedMessage) {

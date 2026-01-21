@@ -4,7 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import steps.Hook;
+import hooks.Hook;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

@@ -3,25 +3,24 @@ package steps.cart;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import steps.Hook;
+import hooks.Hook;
 
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
 public class CartSteps {
-    private int initialCartCount;
 
+    private int initialCartCount;
 
     @Given("I am on the AskOmDch Store page")
     public void iAmOnTheStorePage() {
         Hook.homePage.clickToStorePage();
     }
 
-
     @When("I add {int} products to the cart")
     public void iAddProductsToTheCart(int items) {
-        int initialCount = Hook.cartPage.getCartCount();
+        int initialCount = Hook.cartPage.getHeaderCartCount();
 
         for (int i = 1; i <= items; i++) {
             Hook.storePage.clickToAddToCart();
@@ -34,7 +33,6 @@ public class CartSteps {
         Hook.storePage.clickToViewCart();
     }
 
-
     @Then("I added a product to the cart")
     public void iAddedAProductToTheCart() {
         Hook.storePage.clickToAddToCart();
@@ -44,7 +42,6 @@ public class CartSteps {
     public void iShouldSeeItemInTheCart() {
         Hook.storePage.clickToViewCart();
     }
-
 
     @Given("I have products in the cart")
     public void iHaveProductsInTheCart(List<String> productNames) {
@@ -67,25 +64,19 @@ public class CartSteps {
 
     @Then("the initial cart count should be {int}")
     public void theInitialCartCountShouldBe(int expectedCount) {
-        assertEquals(
-                initialCartCount,
-                expectedCount,
-                "Initial cart count mismatch"
-        );
+        assertEquals(initialCartCount, expectedCount, "Initial cart count mismatch");
     }
-
 
     @When("I remove the product {string}")
     public void iRemoveTheProduct(String productName) {
-       Hook.cartPage.removeProductNameAndWaitForDecrement(productName);
+        Hook.cartPage.removeProductAndWaitForDecrement(productName);
     }
 
     @Then("the cart count should be {int}")
     public void cartCountShouldBe(int expectedCount) {
-        int actualCount = Hook.cartPage.getCartCount();
+        int actualCount = Hook.cartPage.getHeaderCartCount();
         assertEquals(actualCount, expectedCount, "Cart count did not match");
     }
-
 
     @Then("I should see the product removed confirmation for {string}")
     public void iShouldSeeProductRemovedConfirmation(String productName) {
@@ -95,15 +86,13 @@ public class CartSteps {
                 .replaceAll("\\s+", " ")
                 .trim();
 
-
-
         assertEquals(actualMessage, expectedMessage,
                 "Product removal confirmation mismatch");
     }
 
     @Then("I should see the empty cart message when cart is empty")
     public void iShouldSeeEmptyCartMessageWhenCartIsEmpty() {
-        int count = Hook.cartPage.getCartCount();
+        int count = Hook.cartPage.getHeaderCartCount();
 
         if (count == 0) {
             String expectedMessage = "Your cart is currently empty.";
@@ -115,5 +104,4 @@ public class CartSteps {
                     "Empty cart message mismatch");
         }
     }
-
 }

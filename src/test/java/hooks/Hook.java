@@ -1,41 +1,36 @@
-package steps;
+package hooks;
 
 import com.tau.Cucumber_AskOmDch.*;
+import factory.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hook {
 
-    public static WebDriver driver;
+    private WebDriver driver;
+
     public static HomePage homePage;
     public static AccountPage accountPage;
-    public  static StorePage storePage;
-    public  static CartPage cartPage;
+    public static StorePage storePage;
+    public static CartPage cartPage;
     public static CheckoutPage checkoutPage;
 
     @Before
-    public void setUp() {
-        System.setProperty(
-                "webdriver.chrome.driver",
-                "resources/chromedriver-win64/chromedriver.exe"
-        );
-
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com");
-
+    public void before() {
+        driver = DriverFactory.initializeDriver("chrome");
         homePage = new HomePage(driver);
         accountPage = new AccountPage(driver);
         storePage = new StorePage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
-
     }
 
+
     @After
-    public void closeBrowser() {
-        driver.quit();
+    public void after() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

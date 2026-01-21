@@ -12,7 +12,8 @@ import io.cucumber.testng.CucumberOptions;
                 "json:target/cucumber.json",
                 "html:target/cucumber-html-report"
         },
-        snippets = CucumberOptions.SnippetType.CAMELCASE
+        snippets = CucumberOptions.SnippetType.CAMELCASE,
+        monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 }

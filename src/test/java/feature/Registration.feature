@@ -2,7 +2,7 @@
 Feature: User Registration
   As a new user
   I want to create an account
-  So that I can access my account and shop
+  So that I can access my account and shop products
 
   Background:
     Given I am on the AskOmDch Account page

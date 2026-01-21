@@ -2,7 +2,7 @@
 Feature: User Login
   As a registered user
   I want to login to my account
-  So that I can access my account features
+  So that I can access my account features on website
 
   Background:
     Given I am on the AskOmDch Account page on login

@@ -1,5 +1,5 @@
 @cart @store
-Feature: Add item to cart
+Feature: Add item to the cart
   As a customer
   I want to add items to the cart
   So that I can purchase them later

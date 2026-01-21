@@ -9,7 +9,7 @@ Feature: Checkout
     And I am on the checkout page
 
   @smoke @positive
-  Scenario: Place order using different payment methods
+  Scenario: Place order on checkout page
     When I complete checkout with valid billing details:
       | field          | value            |
       | First name     | Tresor           |
